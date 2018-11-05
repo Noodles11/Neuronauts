@@ -1,0 +1,88 @@
+<span class="mode">USUWANIE PLIKÓW</span>
+
+<?php
+	$dzialy = ['hom','beh','neu','zab','ewo'];
+	$katalog = 'articles';
+	$pocz = '/title/';
+	$kon = '/abstract/';
+	
+	echo '<form action="save.php?mode=delete" method="post">';
+	foreach( $dzialy as $dzial ){
+		echo '<script> c'.$dzial.' = '.((counter( $dzial )+1)*33+10).';</script>';
+		$open = opendir($katalog.'/'.$dzial);
+		
+		$lista = [];
+		while( $art = readdir($open) ){
+			if( substr($art,0,1) != '.' ){
+				$lista[] = $art;
+			}
+		}
+		rsort($lista);
+
+		echo '<div class="dzial" id="'.$dzial.'"><span color="'.$dzial.'" class="category">'.$dzial.'</span>';
+		echo '<ul>';
+		foreach( $lista as $el ){
+				
+					$file = fopen($katalog.'/'.$dzial.'/'.$el,'r');
+					$get = fread($file, 8192);
+					$art = load( $get );
+
+					$tytul = $art['title'];
+					if(strlen($tytul)>42){
+						$tytul = substr($tytul,0,42).'...';
+					}
+
+					echo '<li value="'.$dzial.'/'.$el.'" id="'.substr($el,0,strlen($el)-4).'">';
+					echo $tytul;
+					echo '</li>';
+			}
+		echo '</ul>';
+		echo '</div>';
+		closedir($open);
+	}
+	echo '<div id="rmbtn">usuń wybrane</div>';
+	echo '<input id="sendbtn" style="display:none;" type="submit" name="rm" value="" />';
+	echo '</form>';
+?>
+
+<script>
+	//sort left right
+			var l=0, p=0;
+			$('div.dzial').each(function(i,dzial){
+				//console.log(dzial.id,window[dzial.id]);
+				if( l<=p ){
+					dzial.style.float = 'left';
+					l+=window['c'+dzial.id];
+				} else {
+					dzial.style.float = 'right';
+					p+=window['c'+dzial.id];
+				}
+				//console.log('L:',l,'P:',p);
+			}.bind(this));
+
+	$('div.dzial').each(function(index,el){
+			el.style.backgroundColor = window[el.id];
+		});
+	$('div.dzial > ul > li').each(function(index,el){
+		el.addEventListener('click',function(e){
+			if( el.getAttribute('selected')=='selected' ){
+				el.setAttribute('selected','');
+			} else {
+				el.setAttribute('selected','selected');
+			}
+		}.bind(this),false);
+	});
+
+	var send = $('#sendbtn');
+	var files = '';
+	$('#rmbtn')[0].addEventListener('click',function(e){
+		$('div.dzial > ul > li').each(function(index,el){
+			if( el.getAttribute('selected')=='selected' ){
+				files += (files!=''?',':'')+el.getAttribute('value');
+			}
+		}.bind(this));
+		console.log(files);
+		send[0].value = files;
+		send.click();
+	}.bind(this),false);
+</script>

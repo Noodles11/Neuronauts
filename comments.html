@@ -1,0 +1,15 @@
+<?php
+	foreach( $comments as $com ){
+		//print_r($com);
+
+		echo'<li><span class="date">'.date('Y-m-d H:i',strtotime($com['date'])).'</span>';
+		if( $com['userid']!=0 ){
+			$comauth = $baza->getAuth($com['userid']);
+			echo'<span class="nick"><a href="#'.$comauth['id'].'">'.$comauth['nick'].'</a></span>';
+		} else {
+			echo'<span class="nick">'.$com['nick'].'</span>';
+		}
+
+		echo '<div class="koment">'.$com['koment'].'</div></li>';
+	}
+?>

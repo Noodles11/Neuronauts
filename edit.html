@@ -1,0 +1,166 @@
+<span class="mode">EDYCJA PLIKÓW</span>
+
+<?php
+	if( isset($_POST['edit']) ){
+		$edit = $_POST['edit'];
+		$dzial = substr($_POST['edit'],0,3);
+		
+			$file = fopen($katalog.'/'.$edit,'r');
+			$get = fread($file, 8192);
+			$art = load( $get );
+
+		echo '<script>
+			var plik ="'.$edit.'";
+			var tytul="'.$art['title'].'";
+			var abstrakt="'.$art['abstract'].'";
+			var artykul="'.$art['article'].'";
+			var dzial="'.$dzial.'";
+		</script>';
+	} else {
+		echo '<script>var plik = false;</script>';		
+		echo '<form action="journalist.php?mode=edit" method="post">';
+		foreach( $dzialy as $dzial ){
+			echo '<script> c'.$dzial.' = '.((counter( $dzial )+1)*33+10).';</script>';
+			$open = opendir($katalog.'/'.$dzial);
+			
+			$lista = [];
+			while( $art = readdir($open) ){
+				if( substr($art,0,1) != '.' ){
+					$lista[] = $art;
+				}
+			}
+			rsort($lista);
+
+			echo '<div class="dzial" id="'.$dzial.'"><span color="'.$dzial.'" class="category">'.$dzial.'</span>';
+			echo '<ul>';
+			foreach( $lista as $el ){
+				
+					$file = fopen($katalog.'/'.$dzial.'/'.$el,'r');
+					$get = fread($file, 8192);
+					$art = load( $get );
+
+					$tytul = $art['title'];
+					if(strlen($tytul)>42){
+						$tytul = substr($tytul,0,42).'...';
+					}
+
+					echo '<li value="'.$dzial.'/'.$el.'" id="'.substr($el,0,strlen($el)-4).'">';
+					echo $tytul;
+					echo '</li>';
+			}
+			echo '</ul>';
+			echo '</div>';
+			closedir($open);
+		}
+		echo '<input id="btnok" style="display:none;" type="submit" name="edit" value="" />';
+		echo '</form>';
+	}
+?>
+
+<form id="saveform" action="save.php?mode=edit" method="post">
+	<ul>
+		<li><div class="label">Dział:</div>
+			<select name="dzial">
+				<option value="beh">behawior</option>
+				<option value="zab">zaburzenia</option>
+				<option value="neu">neuroanatomia</option>
+				<option value="ewo">ewolucja</option>
+				<option value="hom">strona główna</option>
+			</select>
+			<div id="dzial" name="dzial" value=""></span>
+		</li>
+		<li><div class="label">Tytuł:</div><input id="tytul" type="text" name="arttitle" /></li>
+		<li class="opis"><div class="label">Abstr:</div><textarea id="abstract" type="text" name="abstract" /></textarea></li>
+	    <li class="opis"><div class="label">Treść:</div><textarea id="article" type="text" name="content" /></textarea></li>
+	    <li><input id="btnok" type="submit" name="edit" value="OK" /></li>
+	</ul>
+</form>
+
+<script>
+	if( plik ){
+		var check = [true,true,true];
+		var title = $('input#tytul')[0];
+		var abstract = $('textarea#abstract')[0];
+		var article = $('textarea#article')[0];
+		var send = $('input#btnok');
+
+		title.value = tytul;
+		abstract.value = abstrakt;
+		article.value = artykul;
+		$('select > option').each(function(index,el){
+			if( el.getAttribute('value')==dzial ){
+				$('#dzial')[0].innerHTML = el.innerHTML;
+				$('#dzial').value = el.innerHTML;
+				$('select').remove();
+			}
+		});
+
+		title.addEventListener('keyup',function(e){
+			check[0] = ( title.value != '' ? true : false);
+			checkok();
+		}.bind(this),false);
+		article.addEventListener('keyup',function(e){
+			check[1] = ( article.value != '' ? true : false);
+			checkok();
+		}.bind(this),false);
+		abstract.addEventListener('keyup',function(e){
+			check[2] = ( abstract.value != '' ? true : false);
+			checkok();
+		}.bind(this),false);
+
+		function checkok(){
+			if( check[0] && check[1] && check[2] ){
+				$('input#btnok')[0].removeAttribute('disabled');
+			}
+			else {
+				$('input#btnok')[0].setAttribute('disabled','');
+			}
+		}
+
+		send[0].addEventListener('click',function(e){
+			send[0].value = plik;
+			send.click();
+		}.bind(this),false);
+
+		// function observe(){
+		// 	abstract.addEventListener('keydown',react.bind(abstract),false);
+		// 	article.addEventListener('keydown',react.bind(article),false);
+		// }
+		// function react( e ){
+		// 	if( e.keyCode=='9' ){ //TAB
+		// 		e.preventDefault();
+		// 		this.value += '\t';
+		// 	}
+		// }
+		// observe();
+	} else {
+
+		$('#saveform').remove();
+
+		//sort left right
+			var l=0, p=0;
+			$('div.dzial').each(function(i,dzial){
+				//console.log(dzial.id,window[dzial.id]);
+				if( l<=p ){
+					dzial.style.float = 'left';
+					l+=window['c'+dzial.id];
+				} else {
+					dzial.style.float = 'right';
+					p+=window['c'+dzial.id];
+				}
+				//console.log('L:',l,'P:',p);
+			}.bind(this));
+
+		$('div.dzial').each(function(index,el){
+			el.style.backgroundColor = window[el.id];
+		});
+		var send = $('input#btnok');
+		$('div.dzial > ul > li').each(function(index,el){
+			el.addEventListener('click',function(e){
+				send.hide();
+				send[0].value = el.getAttribute('value');
+				send.click();
+			}.bind(this),false);
+		});
+	}
+</script>

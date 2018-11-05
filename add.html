@@ -1,0 +1,65 @@
+<span class="mode">NOWY ARTYKUŁ</span>
+
+<form action="save.php?mode=add" method="post">
+	<ul>
+		<li><div class="label">Dział:</div>
+			<select name="dzial">
+				<option value="beh">behawior</option>
+				<option value="zab">zaburzenia</option>
+				<option value="neu">neuroanatomia</option>
+				<option value="ewo">ewolucja</option>
+				<option value="hom">strona główna</option>
+			</select>
+		</li>
+		<li><div class="label">Tytuł:</div><input id="tytul" type="text" name="arttitle" /></li>
+	    <li class="opis"><div class="label">Abstr:</div><textarea id="abstract" type="text" name="abstract" /></textarea></li>
+	    <li class="opis"><div class="label">Treść:</div><textarea id="article" type="text" name="content" /></textarea></li>
+	    <li><input disabled id="btnok" type="submit" name="submit" value="OK" /></li>
+	</ul>
+</form>
+
+<script>
+	var check = [false,false,false];
+	var title = $('input#tytul')[0];
+	var abstract = $('textarea#abstract')[0];
+	var article = $('textarea#article')[0];
+	
+	title.value = '';
+	abstract.value = '';
+	article.value = '';
+	title.focus();
+
+	title.addEventListener('keyup',function(e){
+		check[0] = ( title.value != '' ? true : false);
+		checkok();
+	}.bind(this),false);
+	article.addEventListener('keyup',function(e){
+		check[1] = ( article.value != '' ? true : false);
+		checkok();
+	}.bind(this),false);
+	abstract.addEventListener('keyup',function(e){
+		check[2] = ( abstract.value != '' ? true : false);
+		checkok();
+	}.bind(this),false);
+
+	function checkok(){
+		if( check[0] && check[1] && check[2] ){
+			$('input#btnok')[0].removeAttribute('disabled');
+		}
+		else {
+			$('input#btnok')[0].setAttribute('disabled','');
+		}
+	}
+
+	// function observe(){
+	// 	abstract.addEventListener('keydown',react.bind(abstract),false);
+	// 	article.addEventListener('keydown',react.bind(article),false);
+	// }
+	// function react( e ){
+	// 	if( e.keyCode=='9' ){ //TAB
+	// 		e.preventDefault();
+	// 		this.value += '\t';
+	// 	}
+	// }
+	// observe();
+</script>

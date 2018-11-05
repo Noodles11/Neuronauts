@@ -1,0 +1,27 @@
+<title>NEURONAUCI</title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+<link rel="stylesheet" href="css/main.css" type="text/css" />
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/system.js"></script>
+
+<?php include 'functions.php'; ?>
+
+<?php
+	$dzialy = array('hom','beh','neu','zab','ewo');
+	$katalog = 'articles';
+	require_once('engine.php');
+	$baza = new baza('krusiatka','kognitywistyka','jkloska_cba_pl','mysql.cba.pl');
+?>
+
+<?php
+	session_start();
+
+	if( !isset($_SESSION['login']) ){ 
+		echo '<div id="login" class="none"><a href="login.php">NIEZALOGOWANY</a></div>';
+	} else { 
+		echo '<div id="login" class="logged"><a href="login.php">ZALOGOWANY: '.$_SESSION['login']['login'].'</a></div>';
+	}
+?>

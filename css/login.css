@@ -1,0 +1,90 @@
+form {
+	position: relative;
+	margin-top: 30px;
+}
+
+ul {
+	list-style-type: none;
+}
+ul li {
+	width:100%;
+	margin-bottom:10px;
+}
+div.label {
+	line-height: 30px;
+	width: 110px;
+	float:left;
+	font-size: 14px;
+}
+input {
+	width:300px;
+	padding: 7px 8px;
+}
+input[type=submit] {
+	cursor: pointer;
+}
+input, select, textarea {
+	border: 1px solid lightgray;
+	font-family: inherit;
+}
+
+#btnok {
+	width:80px;
+	height:30px;
+	position: relative;
+	text-transform: uppercase;
+	color: rgb(255,255,255);
+	background-color: rgb(80,80,80);
+	border: 1px solid rgb(30,30,30);
+}
+#btnok[disabled] {
+	background-color: rgb(220,220,220);
+	border: 1px solid rgb(255,255,255);
+	cursor: default;
+}
+#btnok:not([disabled]):hover {
+	background-color: rgba(0,0,0,0.6);
+}
+
+#navigate {
+	position: relative;
+	top: 0px;
+	width: 720px;
+	margin: 0 auto;
+	height: 33px;
+}
+
+.btn {
+	position: relative;
+	z-index: 100;
+	line-height: 33px;
+	padding: 0 10px;
+	background-color: rgba(0,0,0,0.3);
+	font-size: 12px;
+	text-transform: uppercase;
+	cursor: pointer;
+	color: rgb(255,255,255);
+}
+.off {
+	background-color: rgba(0,0,0,0.05);
+	color: rgba(0,0,0,0.2);
+}
+.btn:not(.off):hover {
+	background-color: rgba(0,0,0,0.6);
+}
+
+#content {
+	margin: 50px auto 0 auto;
+}
+
+#menuBar {
+	width: 100%;
+	position: fixed;
+	top:0px;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 100;
+}
+
+.error {
+	color: red !important;
+}

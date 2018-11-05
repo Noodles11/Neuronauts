@@ -1,0 +1,31 @@
+<div id="menuBar">
+	<div id="navigate">
+		<div id="backBtn" class="btn">strona główna</div>
+		<div id="nextGo" class="btn">&gt;</div>
+		<div id="prevGo" class="btn">&lt;</div>
+
+		<div id="category" class="outer"><span>zmień kategorię</span>
+			<ul id="catmenu" class="menu">
+				<a href="reader.php?dzial=beh"><li id="beh"><span class="name" id="beh">behawior</span></li></a>
+				<a href="reader.php?dzial=zab"><li id="zab"><span class="name" id="zab">zaburzenia</span></li></a>
+				<a href="reader.php?dzial=neu"><li id="neu"><span class="name" id="neu">neuroanatomia</span></li></a>
+				<a href="reader.php?dzial=ewo"><li id="ewo"><span class="name" id="ewo">ewolucja</span></li></a>
+				<a href="reader.php?dzial=hom"><li id="hom"><span class="name" id="hom">ogólne</span></li></a>
+			</ul>
+		</div>
+
+		<?php 
+			if( isset($_SESSION['login']) && ($_SESSION['login']['user']=='editor' || $_SESSION['login']['user']=='admin') ){
+				echo('
+					<div id="edit" class="outer"><span>edycja</span>
+						<ul id="editmenu" class="menu">
+							<a href="journalist.php?mode=edit"><li id="'.$_GET['dzial'].'"><span class="name">edytuj</span></li></a>
+							<a href="journalist.php?mode=delete"><li id="'.$_GET['dzial'].'"><span class="name">usuń</span></li></a>
+							<a href="journalist.php?mode=add"><li id="'.$_GET['dzial'].'"><span class="name">dodaj nowy</span></li></a>
+						</ul>
+					</div>
+				');
+			}
+		?>
+	</div>
+</div>

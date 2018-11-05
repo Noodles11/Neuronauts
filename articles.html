@@ -1,0 +1,63 @@
+<?php
+	$dzialy = ( isset($_GET['open']) ? ( $_GET['open']=='all' ? array('hom','beh','zab','neu','ewo') : explode(',',$_GET['open']) ) : array('hom') );
+
+	//LISTA artykulow
+	$all = array();
+	foreach( $dzialy as $dzial ){
+		$art = $baza->getByCateg($dzial);
+		$all[] = $art;
+	}
+
+	function makeNews( $art, $baza ){
+		$comm = $baza->countComments( $art['id'] );
+		$author = $baza->getAuth( $art['author'] );
+		echo '
+			<ul class="news" dzial="'.$art['category'].'" id="'.$art['category'].$art['id'].'">
+				<li class="title">'.$art['title'].'</li>
+				<li class="info"> '.$author['nick'].' | '.date('D Y-m-d H:i',strtotime($art['date'])).' | ('.$comm.')</li>
+				<li class="abstract">'.$art['short'].'</li>
+				<li class="more"><a href="reader.php?dzial='.$art['category'].'&id='.$art['id'].'"><span>więcej</span></a></li>
+			</ul>
+		';
+	}
+
+	function sortuj( $arr, $order ){
+		$sortArray = array();
+		foreach( $arr as $el ){ 
+			foreach( $el as $id => $art ){ 
+				foreach( $art as $key => $value ){ 
+					if( $key == $order ){
+					    $sortArray[] = array($value, $art['id']);
+		}}}} 
+		array_multisort($sortArray,SORT_DESC);
+
+		//print_r($sortArray);
+		return $sortArray;
+	}
+
+	//TWORZENIE ARTYKUŁÓW
+	if( isset($all) && $all[0]!=null ){
+
+		//SORTOWANIE
+		$sortArray = sortuj( $all, 'date' );
+
+		// BUDOWANIE w kolejności
+		foreach( $sortArray as $elem ){
+			$id = $elem[1];
+			foreach( $all as $el ){
+				foreach( $el as $article ){
+					if( $article['id']==$id ){
+						makeNews( $article, $baza );
+					}
+				}
+			}
+		}
+
+	} else {
+		echo 'Brak artykułów';
+	}
+?>
+
+<script>
+	System.setArtColors();
+</script>

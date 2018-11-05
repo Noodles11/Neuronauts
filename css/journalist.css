@@ -1,0 +1,181 @@
+form {
+	position: relative;
+}
+
+ul {
+	list-style-type: none;
+}
+ul li {
+	width:100%;
+	margin-bottom:10px;
+}
+li.opis textarea {
+	resize: none;
+	height:200px;
+	width:670px;
+	padding: 7px 8px;
+}
+
+div.label {
+	line-height: 30px;
+	width: 50px;
+	float:left;
+	font-size: 14px;
+}
+input {
+	width:670px;
+	padding: 7px 8px;
+}
+input[type=submit] {
+	cursor: pointer;
+}
+select {
+	padding: 6px 4px;
+	width:200px;
+}
+#dzial {
+	padding: 6px 4px;
+	width:200px;
+	font-size: 14px;
+}
+
+input, select, textarea {
+	border: 1px solid lightgray;
+	font-family: inherit;
+}
+
+#btnok {
+	width:80px;
+	height:30px;
+	position: absolute;
+	text-transform: uppercase;
+	right:0;
+	top:0px;
+	color: rgb(255,255,255);
+	background-color: rgb(80,80,80);
+	border: 1px solid rgb(30,30,30);
+}
+#btnok[disabled] {
+	background-color: rgb(220,220,220);
+	border: 1px solid rgb(255,255,255);
+	cursor: default;
+}
+#btnok:not([disabled]):hover {
+	background-color: rgba(0,0,0,0.6);
+}
+
+#navigate {
+	position: relative;
+	top: 0px;
+	width: 720px;
+	margin: 0 auto;
+	height: 33px;
+}
+
+.btn {
+	position: relative;
+	z-index: 100;
+	line-height: 33px;
+	padding: 0 10px;
+	background-color: rgba(0,0,0,0.3);
+	font-size: 12px;
+	text-transform: uppercase;
+	cursor: pointer;
+	color: rgb(255,255,255);
+}
+.off {
+	background-color: rgba(0,0,0,0.05);
+	color: rgba(0,0,0,0.2);
+}
+.btn:not(.off):hover {
+	background-color: rgba(0,0,0,0.6);
+}
+
+#content {
+	margin: 50px auto 0 auto;
+}
+
+#menuBar {
+	width: 100%;
+	position: fixed;
+	top:0px;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 100;
+}
+
+#add {
+	float:left;
+	margin-right: 2px;
+}
+#delete {
+	float:left;
+	margin-right: 2px;
+}
+#edit {
+	float: left;
+	margin-right: 2px;
+}
+#return {
+	float: right;
+}
+
+.dzial {
+	border: 1px solid lightgray;
+	padding: 5px;
+	margin-bottom: 10px;
+	position: relative;
+	width:100%;
+	padding-top: 28px;
+	float: left;
+	width:355px;
+}
+.dzial span {
+	width:100%;
+	position: absolute;
+	left:0;
+	top:0;
+	line-height: 25px;
+	font-size: 12px;
+	text-transform: uppercase;
+	padding-left: 10px;
+}
+.dzial li {
+	cursor: pointer;
+	width:100%;
+	padding: 6px 9px;
+	margin:-1px 0 0 0;
+	background-color: white;
+	border:1px solid lightgray;
+}
+.dzial li:hover {
+	background-color: rgb(210,210,210);
+}
+
+.dzial li[selected=selected] {
+	background-color: rgba(0,0,0,1);
+	color: white;
+}
+#rmbtn {
+	float:right;
+	top: -40px;
+	right: 0;
+	position: absolute;
+	width: 200px;
+	cursor: pointer;
+	border:1px solid lightgray;
+	background-color: rgba(0,0,0,0.1);
+	padding: 6px 9px;
+	text-align: center;
+}
+#rmbtn:hover {
+	background-color: rgba(255,0,0,0.3);
+}
+
+#sendbtn {
+	bottom:0;
+}
+
+.mode {
+	line-height: 50px;
+	color: red;
+}

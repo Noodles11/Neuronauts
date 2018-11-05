@@ -1,0 +1,210 @@
+#menuBar {
+	color: rgb(255,255,255);
+}
+#edit { 
+	text-align: center;
+	position: absolute;
+	background-color: rgba(0,0,0,0.1);
+	width: 110px;
+	height: 33px;
+	left: 350px;
+	top: 0;
+}
+#edit:hover #editmenu {
+	display: block;
+}
+#category { 
+	text-align: center;
+	position: absolute;
+	background-color: rgba(0,0,0,0.1);
+	width:137px;
+	top:0;
+	left:160px;
+	height: 33px;
+}
+#category:hover {
+	background-color: rgba(0,0,0,0.2);
+}
+#category:hover #catmenu {
+	display: block;
+}
+.outer span {
+	font-size: 12px;
+	line-height: 33px;
+	text-transform: uppercase;
+	padding: 0 10px;
+	cursor: pointer;
+}
+.menu {
+	list-style-type: none;
+	display: none;
+	position: absolute;
+	border: 1px solid rgba(0,0,0,0.2);
+	z-index: 10;
+	top: 33px;
+}
+.menu li {
+	cursor: pointer;
+	float:left;
+	clear: both;
+	margin-right: 10px;
+	padding: 4px 7px;
+	width:100%;
+	background-color: rgba(255, 250, 242, 1);
+	border-top: 1px solid rgba(0,0,0,0.05);
+}
+.menu li:hover {
+	background-color: rgb(200,200,200);
+}
+
+.menu span {
+	font-size: 10px;
+	text-transform: uppercase;
+	line-height: 20px;
+}
+.menu a {
+	color: inherit;
+}
+span.name {
+	text-align: center;
+}
+
+#content {
+	margin: 30px auto 0 auto;
+}
+
+#newsBox ul {
+	list-style-type: none;
+	float:left;
+	position: relative;
+	width: 100%;
+}
+#newsBox ul li {
+}
+	#newsBox ul li.abstract {
+		clear:both;
+		padding: 10px 0 !important;
+		border-top: 1px solid black;
+		font-size: 14px;
+		text-align: justify;
+		border-bottom: 1px dashed lightgray;
+	}
+	#newsBox ul li.content {
+		clear:both;
+		padding: 10px 0 !important;
+		text-align: justify;
+		font-size: 14px;
+	}
+	#newsBox ul li.date {
+		float:left;
+		line-height: 35px;
+		margin-right: 10px;
+		font-size: 12px;
+		text-transform: uppercase;
+	}
+	#newsBox ul li.info {
+		/*background-color: rgb(255,0,0);*/
+		font-size: 12px;
+		color: rgb(189, 189, 189);
+		margin-top: 10px;
+	}
+	#newsBox ul li.title {
+		float:left;
+		font-size: 25px;
+		clear: both;
+		margin-bottom: 5px;
+	}
+
+#navigate {
+	position: relative;
+	top: 0px;
+	width: 720px;
+	margin: 0 auto;
+	height: 33px;
+}
+
+.btn {
+	position: relative;
+	z-index: 100;
+	line-height: 33px;
+	padding: 0 10px;
+	background-color: rgba(0,0,0,0.1);
+	font-size: 12px;
+	text-transform: uppercase;
+	cursor: pointer;
+	color: rgb(255,255,255);
+}
+.off {
+	background-color: rgba(0,0,0,0.05);
+	color: rgba(0,0,0,0.2);
+}
+.btn:not(.off):hover {
+	background-color: rgba(0,0,0,0.2);
+}
+#backBtn {
+	float: left;
+}
+#prevGo {
+	float: right;
+	margin-right:2px;
+}
+#nextGo {
+	float: right;
+}
+
+
+#comments {
+	margin-bottom:20px;
+	border-top: 1px solid black;
+	margin-top: 20px;
+}
+#comments li {
+	padding: 10px 0;
+	position: relative;
+}
+span.komentarze {
+	margin-top: 30px;
+	float: left;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0 0 0;
+}
+#comments li span.nick {
+	font-size: 11px;
+	padding:5px 5px 5px 10px;
+	color: black;
+	position: relative;
+}
+#comments li span.date {
+	font-size: 11px;
+	padding:5px 5px 5px 10px;
+	color: black;
+	position: relative;
+}
+#comments li span.nick a {
+	color: blue;
+}
+#comments li div.koment {
+	font-size: 12px;
+	margin-left: 0px;
+	padding: 10px 10px 10px 30px;
+	border-radius: 10px;
+	background-color: rgb(255,255,255);
+}
+
+#commentForm span {
+	font-size: 12px;
+	line-height: 26px;
+}
+
+#com_send {
+	float:right;
+	padding: 3px 5px;
+	/* border: 1px solid lightgray; */
+	text-transform: uppercase;
+}
+#com_nick {
+	padding: 3px 5px;
+	width: 200px;
+	margin-left: 10px;
+}
